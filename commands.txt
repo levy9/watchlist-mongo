@@ -1,1 +1,4 @@
 git remote add origin git@github.com:levy9/watchlist-mongo.git
+git add .
+git commit -m "I'm ready!"
+git push -u origin master
