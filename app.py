@@ -8,18 +8,13 @@ a = os.getenv('TEST_ENV')
 print('test value', a)
 
 
-name = 'YQY'
-movies = [
-    {'title': 'My Neighbor Totoro', 'year': '1988'},
-    {'title': 'Dead Poets Society', 'year': '1989'},
-    {'title': 'A Perfect World', 'year': '1993'},
-    {'title': 'Leon', 'year': '1994'},
-    {'title': 'Mahjong', 'year': '1996'},
-    {'title': 'Swallowtail Butterfly', 'year': '1996'},
-    {'title': 'King of Comedy', 'year': '1999'},
-    {'title': 'Devils on the Doorstep', 'year': '1999'},
-    {'title': 'WALL-E', 'year': '2008'},
-    {'title': 'The Pork of Music', 'year': '2012'},
+name = '睿光智云'
+products = [
+    {'title': '北斗高精度监测接收机', 'price': '6000-12000RMB'},
+    {'title': '高精度组合导航设备', 'price': '10000-90000RMB'},
+    {'title': '5G DTU', 'price': '700-2500RMB'},
+    {'title': 'GNSS高精度测量型天线', 'price': '500-1000RMB'},
+    {'title': 'GNSS高精度扼流圈天线', 'price': '5000-15000RMB'},
 ]
 
 
@@ -30,7 +25,7 @@ def index():
     #print(imagesrc)
     #return '<h1>Hello Totoro!</h1><img src=%s>' % imagesrc
     #return 'Welcome to My Watchlist!'
-    return render_template('index.html', name=name, movies=movies)
+    return render_template('index.html', name=name, products=products)
 
 @app.route('/test')
 def test_url_for():

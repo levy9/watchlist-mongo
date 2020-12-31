@@ -6,10 +6,45 @@ body {
     font-family: Helvetica, Arial, sans-serif;
 }
 
+
+}
 /* 页脚 */
 footer {
     color: #888;
     margin-top: 15px;
     text-align: center;
     padding: 10px;
+}
+
+/* 公司logo */
+.logo {
+    width: 80px;
+}
+
+/* 产品列表 */
+.product-list {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.product-list li {
+    padding: 12px 24px;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-list li:last-child {
+    border-bottom:none;
+}
+
+.product-list li:hover {
+    background-color: #f8f9fa;
+}
+
+/* 卫星 */
+.satellite {
+    display: block;
+    margin: 0 auto;
+    height: 50px;
 }
