@@ -10,10 +10,13 @@ body {
 }
 /* 页脚 */
 footer {
-    color: #888;
-    margin-top: 15px;
+    clear: both;
+    display: block;
+    margin: 0px auto;
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
     text-align: center;
-    padding: 10px;
 }
 
 /* 公司logo */

@@ -12,15 +12,15 @@
         {{ name }} 产品列表
     </h2>
     {# 使用length过滤器获取产品列表的变量的长度 #}
-    <p>共{{ products|length}}种产品</p>
+    <p style="text-align:center">共{{ products|length}}种产品</p>
     <ul class="product-list" >
         {% for product in products %} {# 迭代products变量 #}
         <li>{{ product.title }} : {{ product.price }}</li> {# 等同于product['title']#}
         {% endfor %}
     </ul>
     <img alt="Satellite" class="satellite" src="{{ url_for('static', filename='images/satellite.png')}}">
-    <footer>
-        <small>&copy; 2021 <a href="http://www.realbeam.ltd">睿光智云2021</a></small>
+    <footer style="text-align: center">
+        <small><a style="text-align:center" href="http://www.realbeam.ltd">睿光智云2021</a></small>
     </footer>
 </body>
 </html>
