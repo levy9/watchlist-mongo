@@ -127,7 +127,7 @@ def index():
     #print(os.getcwd())
     #imagesrc = url_for('static', filename='images/totoro.gif', _external=True)
     #print(imagesrc)
-    print(type(products[0]))
+    #print(type(products[0]))
     #return '<h1>Hello Totoro!</h1><img src=%s>' % imagesrc
     #return 'Welcome to My Watchlist!'
     return render_template('index.html', name=name, products=products)
