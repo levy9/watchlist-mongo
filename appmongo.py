@@ -71,7 +71,7 @@ class MongoDBfile(object):
         #print(df)
         for index, row in df.iterrows():
             #print(row["stationid"], row["updatetime"])
-            tempdict = {'title': row['stationid'], 'price': row['datainport']}
+            tempdict = {'stationid': row['stationid'], 'datainport': row['datainport'], 'comment': row['comment']}
             roverlist.append(tempdict)
         return roverlist
 
@@ -111,7 +111,7 @@ settinghelper = MongoDBfile('setting', 'stationstatus', dburl)
 
 name = '睿光智云'
 
-products = settinghelper.findNotNullSettingDictList('stationid')
+stations = settinghelper.findNotNullSettingDictList('stationid')
 """
 products = [
     {'title': '北斗高精度监测接收机', 'price': '6000-12000RMB'},
@@ -130,7 +130,7 @@ def index():
     #print(type(products[0]))
     #return '<h1>Hello Totoro!</h1><img src=%s>' % imagesrc
     #return 'Welcome to My Watchlist!'
-    return render_template('index.html', name=name, products=products)
+    return render_template('stationtest.html', name=name, stations=stations)
 
 @app.route('/test')
 def test_url_for():
