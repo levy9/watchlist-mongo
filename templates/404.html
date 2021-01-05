@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }} 错误提示</title>
+    <link rel="icon" href="{{ url_for('static', filename='RGZY.ico')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_station.css')}}">
+</head>
+<body>
+    <h2 style="text-align:center">
+        <img alt="Logo" class="logo" style="vertical-align:middle" src="{{ url_for('static', filename='RGZY.png')}}">
+        {{ name }} 错误提示
+    </h2>
+    <ul class="station-list">
+        <li>
+            页面走丢了 404
+            <span class="flost-right">
+                <a href="{{ url_for('index')}}">返回主页</a>
+            </span>
+        </li>
+    </ul>
+    <footer style="text-align: center">
+        <small><a style="text-align:center" href="http://www.realbeam.ltd">睿光智云2021</a></small>
+    </footer>
+</body>
+</html>

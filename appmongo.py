@@ -141,5 +141,10 @@ def test_url_for():
 def user_page(name):
     return 'User: %s' % escape(name)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    name = 'rbadmin'
+    return render_template('404.html', name=name), 404
+
 app.run()
 #app.run(host='0.0.0.0', port=3000)
