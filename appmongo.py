@@ -130,7 +130,7 @@ def index():
     #print(type(products[0]))
     #return '<h1>Hello Totoro!</h1><img src=%s>' % imagesrc
     #return 'Welcome to My Watchlist!'
-    return render_template('stationtest.html', name=name, stations=stations)
+    return render_template('index.html', name=name, stations=stations)
 
 @app.route('/test')
 def test_url_for():
@@ -144,7 +144,12 @@ def user_page(name):
 @app.errorhandler(404)
 def page_not_found(e):
     name = 'rbadmin'
-    return render_template('404.html', name=name), 404
+    return render_template('404.html'), 404
+
+@app.context_processor
+def inject_name():
+    name = 'rbadmin2'
+    return dict(name=name)
 
 app.run()
 #app.run(host='0.0.0.0', port=3000)

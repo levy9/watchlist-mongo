@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=divice-width, initial-scale=1.0">
+    <title>{{ regioncode }}站点列表</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_station.css')}}" type="text/css">
+    <link rel="icon" href="{{ url_for('static', filename='RGZY.ico')}}">
+    {% endblock %}
+</head>
+<body>
+    <h2 style="text-align:center">
+        <img alt="Logo" class="logo" style="vertical-align:middle" src="{{ url_for('static', filename='images/logo.png')}}">
+        {{ name }} 站点列表
+    </h2>
+    {# 使用length过滤器获取站点列表的变量的长度 #}
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index')}}">Home</a></li>
+        </ul>
+    </nav>
+    {% block content %}{% endblock %}
+    <footer style="text-align: center">
+        <small><a style="text-align:center" href="http://www.realbeam.ltd">睿光智云2021</a></small>
+    </footer>
+</body>
+</html>
