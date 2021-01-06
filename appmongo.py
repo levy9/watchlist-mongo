@@ -1,9 +1,13 @@
-from flask import Flask, url_for, escape, render_template
+from flask import Flask, url_for, escape, render_template, request, redirect, flash
 from dotenv import load_dotenv
 import os
 from pymongo import MongoClient
 from datetime import datetime, timedelta
 import pandas as pd
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
+import plotly.graph_objects as go
 
 class MongoDBfile(object):
     def __init__(self, dbname, collectionname, ip):
@@ -31,8 +35,8 @@ class MongoDBfile(object):
     def FindAllRawValue(self, starttime, endtime):
         #print('ready to find!')
 
-        if self.collection.count_documents({'datetime': {"$gte": starttime, "$lte": endtime}}) > 0:
-            rawalldata = self.collection.find({'datetime': {"$gte": starttime, "$lte": endtime}})
+        if self.collection.count_documents({'updatetime': {"$gte": starttime, "$lte": endtime}}) > 0:
+            rawalldata = self.collection.find({'updatetime': {"$gte": starttime, "$lte": endtime}})
             df = pd.DataFrame(list(rawalldata))
             #print(df)
             return True, df
@@ -103,6 +107,8 @@ class MongoDBfile(object):
 
 app = Flask(__name__)
 
+app_dash = dash.Dash(__name__, server=app, url_base_pathname='/dashplot/')
+
 a = os.getenv('TEST_ENV')
 print('test value', a)
 
@@ -120,6 +126,31 @@ products = [
     {'title': 'GNSS高精度测量型天线', 'price': '500-1000RMB'},
     {'title': 'GNSS高精度扼流圈天线', 'price': '5000-15000RMB'},
 ]"""
+
+starttime = datetime(2010, 11, 13, 0, 0, 0)
+endtime = datetime.utcnow()
+try:
+    resulthelper = MongoDBfile('setting', 'stationstatus', dburl)
+    isFind, places = resulthelper.FindAllRawValue(starttime, endtime)
+    if isFind:
+        token = 'pk.eyJ1IjoiYmlsbDU3NTMiLCJhIjoiY2toOTZ3ZmYyMGc4ZTJ6cWRyanM0aTRyNCJ9.uCK3ibcVt2oqE5PoKlgdrw'
+        # token = 'pk.eyJ1IjoiYmlsbDU3NTMiLCJhIjoiY2toOTZ6OW9hMDYwODJ1cGpicWp1enk3byJ9.YCLzds-wdzUjoCLgBjDBZQ'
+        fig = go.Figure(go.Scattermapbox(mode='markers',
+                                         lon=places.lon,
+                                         lat=places.lat,
+                                         hovertext=places.stationid,
+                                         hoverinfo='text'
+                                         ))
+        # fig.update_layout(mapbox={'accesstoken': token, 'style': 'outdoors'})
+        # fig.update_layout(mapbox={'accesstoken': token, 'style': 'satellite'})
+        fig.update_layout(mapbox={'accesstoken': token, 'style': 'satellite-streets'})
+        #fig.show()
+except Exception as e:
+    print(Exception)
+
+app_dash.layout = html.Div([
+    dcc.Graph(figure=fig)
+])
 
 
 @app.route('/')
@@ -151,5 +182,6 @@ def inject_name():
     name = 'rbadmin2'
     return dict(name=name)
 
-app.run()
+app_dash.run_server(host='0.0.0.0', debug=True)
+#app.run()
 #app.run(host='0.0.0.0', port=3000)
